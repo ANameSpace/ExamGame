@@ -1,0 +1,14 @@
+main.title=СЕССИЯ НА ГРАНИ: ЮИТВА ЗА ЗАЧЁТКУ
+main.play=Play
+main.reload=Reload
+main.exit=Exit
+
+game.think.suffix= (мысли)
+
+
+
+lose.title=GAME OVER
+lose.timer=В главное меню через
+
+win.title=ТЫ ВЫИГРАЛ!
+win.timer=В главное меню через
