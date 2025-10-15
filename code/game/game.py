@@ -38,7 +38,7 @@ def level_0(game: GameAPI) -> None | str:
 
     game.look("room")
 
-    game.think(player_actor, "Нужно собрать рюкзак и скореевыходить.")
+    game.think(player_actor, "Нужно собрать рюкзак и скорее выходить.")
     items = ("Тройка (карта)", "Скидочная карта", "Купон на скидку в магазине мебели")
     if game.select("Что взять (только 1)?", items) == 0:
         player["inventory"].append("Тройка (карта)")

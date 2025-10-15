@@ -1,4 +1,4 @@
-main.title=СЕССИЯ НА ГРАНИ: ЮИТВА ЗА ЗАЧЁТКУ
+main.title=СЕССИЯ НА ГРАНИ: БИТВА ЗА ЗАЧЁТКУ
 main.play=Play
 main.reload=Reload
 main.exit=Exit
