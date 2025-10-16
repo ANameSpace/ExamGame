@@ -113,9 +113,9 @@ class GameScreen(BaseScreen, GameAPI):
         self._phone_border = Rectangle(0, self._max_x // 2, self._max_y, (self._max_x // 2) - 1, filler="░")
 
         x = (self._max_index_x - 70) // 2
-        y_size = self._max_y - 10
-        self._select_border = Rectangle(self._center_index_y - 10, x, y_size, 70, filler="░")
-        self._select_text = TextField(self._center_index_y - 8, x, y_size, 68, align=TextField.TextAlign.CENTER)
+        y_temp = self._center_index_y // 2
+        self._select_border = Rectangle(y_temp, x, self._center_index_y, 70, filler="░")
+        self._select_text = TextField(y_temp + 2, x, 2, 68, align=TextField.TextAlign.CENTER)
 
         for level in self.__levels:
             result = level(self)
@@ -207,8 +207,7 @@ class GameScreen(BaseScreen, GameAPI):
         self._stdscr.refresh()
 
         x = (self._max_index_x - 66) // 2
-        y_size = self._max_y - 8
-        selector = Selector(self._center_index_y - 6, x, y_size, 68, variants)
+        selector = Selector((self._center_index_y // 2) + 4, x, self._center_index_y - 4, 68, variants)
         selector.pre_render(self._stdscr)
         return selector.select(self._stdscr)
 
