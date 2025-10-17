@@ -90,7 +90,7 @@ def level_0(game: GameAPI) -> None | str:
     game.talk(author_actor, "Вы выходите на остановке и подходите к посту охраны.")
     if player["intelligence"] < 0:
         game.talk(author_actor, "Вы пытаетесь войти, но вас останавливает охранник.")
-        game.talk(security_actor, "Вы нарушает форму одежды. Это не офисный стиль, так ещё и в шортах!")
+        game.talk(security_actor, "Вы нарушаете форму одежды. Это не офисный стиль, так ещё и в шортах!")
         game.talk(player_actor, "Но мне очень надо пройти. У меня сегодня зачёт!")
         game.talk(security_actor, "Н-Е-Т-!")
         return "Что-то явно пошло не так."
@@ -107,10 +107,38 @@ def level_1(game: GameAPI) -> None | str:
 
     player_actor = player["actor"]
     author_actor = actors["author"]
+    ss_teacher_actor = actors["social studies teacher"]
 
     game.look("class_1")
     game.talk(author_actor, "Начало уровня 1 (пара обществознания)")
+    game.talk(author_actor, "Вы добрались до аудитории, остановившись около прикрытой двери")
+
+    player["reputation"] = 0
+    variants = (
+        "Зайти не постучавшись (-10 к репутации)",
+        "Постучаться"
+    )
+    politeness_more = False
+    match game.select("Ведь препод не будет против?", variants): 
+        case 0:
+            game.talk(author_actor, "Вы как ни в чём не бывало заходите в аудиторию, но преподаватель явно был не очень рад вашей авантюре")
+            game.talk(ss_teacher_actor, "Выйдите и зайдите нормально")
+            game.talk(author_actor, "Вы развернулись и вышли из аудитории всё-таки постучав в дверь")
+            game.talk(ss_teacher_actor, "Войдите")
+            player["reputation"] -= 10
+            politeness_more = True
+        case 1:
+            game.talk(author_actor, "Вы постучались и вам разрешили войти")
+            return
+        
+    game.talk(author_actor, "Вы вошли, и уже хотели сесть за парту, но вас вопросительно окликнул преподаватель")
+    game.talk(ss_teacher_actor, "Молодой человек а вы собственно говоря кто?")
+    game.think(player_actor, "Ваш студент, пришёл на зачёт")
+    game.talk(ss_teacher_actor, "Я вас впервые вижу за год")
+    
+
+    
 
     return
 
-# Для добавления новых уровней добавь def level_НОМЕР(game: GameAPI) -> None | str: и впиши это в game_data.pt (load_levels())
+# Для добавления новых уровней добавь def level_НОМЕР(game: GameAPI) -> None | str: и впиши это в game_data.py (load_levels())
