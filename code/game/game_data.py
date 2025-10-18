@@ -35,7 +35,7 @@ def load_actors() -> dict[id: str, tuple[str, TextColor]]:
 def load_levels() -> list[Callable[[Any], None | str]]:
     levels = list()
 
-    levels.append(level_0)
     levels.append(level_1)
+    levels.append(level_2)
 
     return levels
