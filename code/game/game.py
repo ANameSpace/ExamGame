@@ -1,7 +1,7 @@
 from code.game.game_api import GameAPI
 
 def level_0(game: GameAPI) -> None | str:
-    player = game.get_player()
+    player = game.player
     actors = game.get_actors()
 
     # Действующие лица уровня. Предворительно добавь их в game_data.py
@@ -47,7 +47,7 @@ def level_0(game: GameAPI) -> None | str:
         game.talk(author_actor, "Видимо вы хотите пойти в магазин после зачёта. Но может стоило взять 'Тройку'?")
 
     player["intelligence"] = 0
-    wardrobe = ("Костюм (+10 интеллекта)", "Спортивыная футболка и шорты", "Повседневная одежда")
+    wardrobe = ("Костюм", "Спортивыная футболка и шорты", "Повседневная одежда")
     while True:
 
         match game.select("Что одеть?", wardrobe):
@@ -102,7 +102,7 @@ def level_0(game: GameAPI) -> None | str:
 
 
 def level_1(game: GameAPI) -> None | str:
-    player = game.get_player()
+    player = game.player
     actors = game.get_actors()
 
     player_actor = player["actor"]
@@ -115,11 +115,11 @@ def level_1(game: GameAPI) -> None | str:
 
     player["reputation"] = 0
     variants = (
-        "Зайти не постучавшись (-10 к репутации)",
+        "Зайти не постучавшись",
         "Постучаться"
     )
     politeness_more = False
-    match game.select("Ведь препод не будет против?", variants): 
+    match game.select("Ваши действия:", variants): 
         case 0:
             game.talk(author_actor, "Вы как ни в чём не бывало заходите в аудиторию, но преподаватель явно был не очень рад вашей авантюре")
             game.talk(ss_teacher_actor, "Выйдите и зайдите нормально")
@@ -129,12 +129,26 @@ def level_1(game: GameAPI) -> None | str:
             politeness_more = True
         case 1:
             game.talk(author_actor, "Вы постучались и вам разрешили войти")
+        case _:
+            game.talk(author_actor, "")
             return
         
     game.talk(author_actor, "Вы вошли, и уже хотели сесть за парту, но вас вопросительно окликнул преподаватель")
     game.talk(ss_teacher_actor, "Молодой человек а вы собственно говоря кто?")
     game.think(player_actor, "Ваш студент, пришёл на зачёт")
-    game.talk(ss_teacher_actor, "Я вас впервые вижу за год")
+    game.talk(ss_teacher_actor, "Любопытно, я вас впервые вижу за год. А где пропадали если не секрет?")
+    
+    variants = (
+        "Сказать правду",
+        "Попытаться схитрить"
+    )
+    honesty_more = False
+    match game.select("Ваши действия:", variants):
+        case 0 :
+            game.think(player_actor, "Не буду скрывать, я прогуливал")
+            game.talk(ss_teacher_actor, "")
+
+
     
 
     
