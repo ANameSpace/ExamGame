@@ -104,7 +104,7 @@ def level_1(game: GameAPI) -> None | str:
 
 
 def level_2(game: GameAPI) -> None | str:
-    player = game.player
+    player = game.get_player()
     actors = game.get_actors()
 
     player_actor = player["actor"]
