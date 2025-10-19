@@ -172,7 +172,7 @@ def level_2(game: GameAPI) -> None | str:
     )
         match game.select("Ваши действия:", variants):
             case 0 :
-                game.think(player_actor, "Я не против, мне всё равно нечего терять.")
+                game.talk(player_actor, "Я не против, мне всё равно нечего терять.")
                 game.talk(ss_teacher_actor, "Итак начнём. Орёл или решка?")
 
                 variants = (
