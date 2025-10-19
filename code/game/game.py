@@ -203,7 +203,7 @@ def level_2(game: GameAPI) -> None | str:
         game.talk(author_actor, "Вы долго раздумывали какой билет вытянуть и взяли первый какой попался под руку.")
         game.talk(author_actor, "Вам попался счастливый билет.")
         game.talk(author_actor, "Удача ли это или что то другое?")
-        game.think(player_actor, "У меня счастливый билет!")
+        game.talk(player_actor, "У меня счастливый билет!")
         game.talk(ss_teacher_actor, "Вот ж блин, везучий попался.")
         game.talk(ss_teacher_actor, "Давай зачётку, везунчик.")
         game.talk(author_actor, "Вы протягиваете зачётку")
