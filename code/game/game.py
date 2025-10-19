@@ -235,7 +235,7 @@ def level_2(game: GameAPI) -> None | str:
                 game.think(player_actor, "Я ответил.")
                 game.talk(author_actor, "Преподаватель задал наипростейший вопрос, на который вы не ответили.")
                 game.talk(ss_teacher_actor, "Что и требовалось доказать, я вам передумал даже три ставить.")
-                game.think(player_actor, "Стойте стойте, ставьте три ладно.")
+                game.talk(player_actor, "Стойте стойте, ставьте три ладно.")
                 game.talk(ss_teacher_actor, "Нет уж голубчик, не заслужили.")
                 game.talk(author_actor, "Преподаватель ставит два в зачётку.")
                 game.talk(author_actor, "Вы выходите из аудитории недовольным и напраляетесь домой.")
