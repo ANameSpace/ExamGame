@@ -52,7 +52,7 @@ def level_1(game: GameAPI) -> None | str:
     wardrobe = ("Костюм", "Спортивыная футболка и шорты", "Повседневная одежда")
     while True:
 
-        match game.select("Что одеть?", wardrobe):
+        match game.select("Что надеть?", wardrobe):
             case 0:
                 if sleep_more:
                     game.talk(author_actor, "Вы панически оглядываетесь. Костюм? В таком состоянии его не найти!")
