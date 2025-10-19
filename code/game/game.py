@@ -66,8 +66,7 @@ def level_1(game: GameAPI) -> None | str:
             case _:
                 break
 
-    game.talk(author_actor, "Вы выбегаете из дома и вскоре садитесь в автобус.")
-    game.talk(author_actor, "Свежий воздух бодрит!")
+    game.talk(author_actor, "Вы выбегаете из дома и вскоре садитесь в автобус. Свежий воздух бодрит!")
     game.look("bus")
 
     ticket = False
