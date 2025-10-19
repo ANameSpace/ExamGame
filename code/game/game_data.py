@@ -30,6 +30,9 @@ def load_actors() -> dict[id: str, tuple[str, TextColor]]:
 
     actors["social studies teacher"] = ("Преподаватель обществознания", TextColor.RED)
 
+    actors["math teacher"] = ("Преподаватель математики", TextColor.RED)
+    actors["ai"] = ("ChatAI", TextColor.YELLOW)
+
     return actors
 
 def load_levels() -> list[Callable[[Any], None | str]]:
@@ -37,5 +40,6 @@ def load_levels() -> list[Callable[[Any], None | str]]:
 
     levels.append(level_1)
     levels.append(level_2)
+    levels.append(level_3)
 
     return levels

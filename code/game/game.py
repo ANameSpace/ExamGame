@@ -1,4 +1,5 @@
 from code.game.game_api import GameAPI
+from random import getrandbits
 
 def level_1(game: GameAPI) -> None | str:
     player = game.get_player()
@@ -58,7 +59,7 @@ def level_1(game: GameAPI) -> None | str:
                     continue
                 player["intelligence"] += 10
                 game.talk(author_actor, "Вы натягиваете костюм, чувствуя, как уверенность наполняет вас.")
-                game.talk(author_actor, "+10 к интеллект")
+                game.talk(author_actor, "+10 к интеллекту")
                 break
             case 1:
                 player["intelligence"] -= 10
@@ -111,7 +112,7 @@ def level_2(game: GameAPI) -> None | str:
     author_actor = actors["author"]
     ss_teacher_actor = actors["social studies teacher"]
 
-    game.look("class_1")
+    game.look("door")
     game.talk(author_actor, "Уровень 2 (пара обществознания)")
     game.talk(author_actor, "Вы добрались до аудитории, остановившись около прикрытой двери.")
 
@@ -134,7 +135,8 @@ def level_2(game: GameAPI) -> None | str:
         case _ :
             game.talk(author_actor, "")
             return
-        
+
+    game.look("class_1")
     game.talk(author_actor, "Вы вошли, и уже хотели сесть за парту, но вас вопросительно окликнул преподаватель.")
     game.talk(ss_teacher_actor, "Молодой человек, а вы собственно говоря кто?")
     game.talk(player_actor, "Ваш студент, пришёл на зачёт.")
@@ -163,35 +165,35 @@ def level_2(game: GameAPI) -> None | str:
     if player["reputation"] < 0:
         game.talk(ss_teacher_actor, "Могу облегчить вам задачу в какой то степени.")
         game.talk(ss_teacher_actor, "Согласны сыграть в подбрасывание монетки?")
-        game.talk(ss_teacher_actor, "Угадаете сторону монетки поставлю оценку автоматом за год")
-        game.talk(ss_teacher_actor, "А если нет, пойдёте с миром Родине служить")
+        game.talk(ss_teacher_actor, "Угадаете сторону монетки поставлю оценку автоматом за год.")
+        game.talk(ss_teacher_actor, "А если нет, пойдёте с миром Родине служить.")
 
         variants = (
-        "Согласиться.",
-        "Отказаться."
-    )
+            "Согласиться.",
+            "Отказаться."
+        )
         match game.select("Ваши действия:", variants):
             case 0 :
                 game.talk(player_actor, "Я не против, мне всё равно нечего терять.")
                 game.talk(ss_teacher_actor, "Итак начнём. Орёл или решка?")
 
                 variants = (
-        "Выбрать орёл.",
-        "Выбрать решку."
-    )
+                    "Выбрать орёл.",
+                    "Выбрать решку."
+                )
                 eagle = game.select("Ваши действия:", variants) == 0
                 game.talk(player_actor, "Я выбираю орёл." if eagle else "Я выбираю решку.")
                 game.talk(author_actor, "Преподаватель подбрасывает монетку и ловким движением рук ловит монетку.")
 
-                from random import getrandbits
                 if bool(getrandbits(1)):
                     game.talk(author_actor, "Монетка предательски была повернута противоположной стороной.")
-                    game.talk(ss_teacher_actor, "Какая досада молодой человек, повезёт в следующий раз.")
+                    game.talk(ss_teacher_actor, "Какая досада, молодой человек, повезёт в следующий раз.")
                     return "Здравствуй небо в облаках, здравствуй юность в сапогах..."
                 else:
                     game.talk(ss_teacher_actor, "Давай зачётку, везунчик.")
-                    game.talk(author_actor, "Вы протягиваете зачётку")
-                    game.talk(author_actor, "Преподаватель ставит в зачётку пять.")
+                    game.do(player_actor, "протягиваете зачётку")
+                    game.do(ss_teacher_actor, "Ставит в зачётку пять")
+                    player["intelligence"] += 5
                     return
             case 1 :
                 game.talk(player_actor, "Простите, но я не азартный игрок, поэтому откажусь.")
@@ -199,20 +201,21 @@ def level_2(game: GameAPI) -> None | str:
                 return
     if player["intelligence"] > 0:
         game.talk(author_actor, "Преподаватель оглядел вас с ног до головы и сказал:")
-        game.talk(ss_teacher_actor, "Тогда тяни билет красавец.")
+        game.talk(ss_teacher_actor, "Тогда тяни билетб, красавец.")
         game.talk(author_actor, "Вы долго раздумывали какой билет вытянуть и взяли первый какой попался под руку.")
         game.talk(author_actor, "Вам попался счастливый билет.")
         game.talk(author_actor, "Удача ли это или что то другое?")
         game.talk(player_actor, "У меня счастливый билет!")
         game.talk(ss_teacher_actor, "Вот ж блин, везучий попался.")
         game.talk(ss_teacher_actor, "Давай зачётку, везунчик.")
-        game.talk(author_actor, "Вы протягиваете зачётку")
-        game.talk(author_actor, "Преподаватель ставит в зачётку пять.")
+        game.do(player_actor, "протягиваете зачётку")
+        game.do(ss_teacher_actor, "Ставит в зачётку пять")
+        player["intelligence"] += 5
         return
     
     game.talk(ss_teacher_actor, "Тогда тяните билет.")
     game.talk(author_actor, "Вы тяните билет и садитесь за парту готовиться.")
-    game.talk(author_actor, "Как только подготовились вы садитесь возле преподавателя рядом.")
+    game.talk(author_actor, "Как только подготовились, вы садитесь возле преподавателя рядом.")
     game.talk(author_actor, "Вы с большим трудом отвечаете на вопросы.")
     game.talk(author_actor, "Преподаватель буквально вытягивает вас на оценку три.")
     game.talk(ss_teacher_actor, "Согласны на оценку три?")
@@ -224,7 +227,7 @@ def level_2(game: GameAPI) -> None | str:
     match game.select("Ваши действия:", variants):
             case 0 :
                 game.talk(player_actor, "Да")
-                game.talk(author_actor, "Преподаватель вам ставит три в зачётку.")
+                game.do(ss_teacher_actor, "Ставит три в зачётку")
                 game.talk(ss_teacher_actor, "Свободен")
                 game.talk(author_actor, "Вы выходите из аудитории, довольный результатом.")
                 return
@@ -235,9 +238,58 @@ def level_2(game: GameAPI) -> None | str:
                 game.think(player_actor, "Я ответил.")
                 game.talk(author_actor, "Преподаватель задал наипростейший вопрос, на который вы не ответили.")
                 game.talk(ss_teacher_actor, "Что и требовалось доказать, я вам передумал даже три ставить.")
-                game.talk(player_actor, "Стойте стойте, ставьте три ладно.")
-                game.talk(ss_teacher_actor, "Нет уж голубчик, не заслужили.")
-                game.talk(author_actor, "Преподаватель ставит два в зачётку.")
+                game.talk(player_actor, "Стойте, стойте, ставьте три, ладно.")
+                game.talk(ss_teacher_actor, "Нет уж, голубчик, не заслужили.")
+                game.do(ss_teacher_actor, "Ставит два в зачётку.")
                 game.talk(author_actor, "Вы выходите из аудитории недовольным и напраляетесь домой.")
                 return "Иногда не стоит наглеть."
     return
+
+
+def level_3(game: GameAPI) -> None | str:
+    player = game.get_player()
+    actors = game.get_actors()
+
+    player_actor = player["actor"]
+    author_actor = actors["author"]
+    math_teacher_actor = actors["math teacher"]
+    ai_actor = actors["ai"]
+
+    game.look("class_2")
+    game.talk(author_actor, "Уровень 3 (Экзамен по математике)")
+    game.talk(author_actor, "Вы входите в аудиторию и чувствуете, как сердце колотится от волнения.")
+    game.talk(math_teacher_actor, "Добро пожаловать на экзамен. Надеюсь, вы готовы!")
+    game.talk(author_actor, "На столе лежит ваш билет.")
+    game.talk(author_actor, "Вопросы кажутся сложными, но вы решаете попытаться.")
+
+    variants = (
+        "Написать честно.",
+        "Попытаться списать с телефона."
+    )
+    success = False
+    match game.select("Каковы ваши действия:", variants):
+        case 0:
+            game.talk(author_actor, "Вы решили честно ответить на вопросы.")
+            if player["intelligence"] > 5:
+                game.talk(author_actor, "Вы быстро справляетесь с заданиями.")
+                success = True
+            else:
+                game.talk(author_actor, "К сожалению, вам не хватает знаний.")
+        case 1:
+            game.talk(author_actor, "Вы решили воспользоваться телефоном и задать вопрос.")
+            game.phone(player_actor, "Сколько будет 25*25-35^-3?")
+            if bool(getrandbits(1)):
+                game.phone(ai_actor, "Ответ: 625")
+                success = True
+            else:
+                game.phone(ai_actor, "Думает...")
+                game.talk(math_teacher_actor, "Что вы делаете с телефоном на экзамене?!")
+                return "Вы попались на мошенничестве и не смогли сдать экзамен."
+
+    game.talk(author_actor, "Незаметно время экзамена подощло к концу.")
+    if success:
+        game.talk(author_actor, "Вы смогли набрать проходной балл и получили 5.")
+        return
+    else:
+        game.talk(author_actor, "Вы не смогли решить ни одно задание.")
+        return "Вам явно следовало лучше подготовиться к математике."
