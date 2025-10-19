@@ -58,7 +58,7 @@ def level_1(game: GameAPI) -> None | str:
                     continue
                 player["intelligence"] += 10
                 game.talk(author_actor, "Вы натягиваете костюм, чувствуя, как уверенность наполняет вас.")
-                game.talk(author_actor, "+10 к интелегенции")
+                game.talk(author_actor, "+10 к интеллект")
                 break
             case 1:
                 player["intelligence"] -= 10
