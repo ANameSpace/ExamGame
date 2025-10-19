@@ -23,8 +23,7 @@ def level_1(game: GameAPI) -> None | str:
     sleep_more = False
     match game.select("Может поспать ещё?", variants):
         case 0:
-            game.talk(author_actor, "Вы устало переворачиваетесь на бок.")
-            game.talk(author_actor, "В надежде вновь окунуться в сладкие объятия сна...")
+            game.talk(author_actor, "Вы устало переворачиваетесь на бок, в надежде вновь окунуться в сладкие объятия сна...")
             game.do(unknown_actor, "звук уведомления")
             game.phone(aleksandr_actor, "Эй, ты где? Не забыл про зачёты?")
             game.phone(player_actor, "Что? Нет-нет, я помню! Просто... сейчас... ещё сплю!")
