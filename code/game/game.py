@@ -179,19 +179,20 @@ def level_2(game: GameAPI) -> None | str:
         "Выбрать орёл.",
         "Выбрать решку."
     )
-                match game.select("Ваши действия:", variants):
-                    case 0 :
-                        game.think(player_actor, "Я выбираю орёл.")
-                        game.talk(author_actor, "Преподаватель подбрасывает монетку и ловким движением рук ловит монетку.")
-                        game.talk(author_actor, "Монетка предательски была повернута противоположной стороной то есть решкой.")
-                        game.talk(ss_teacher_actor, "Какая досада молодой человек, повезёт в следующий раз.")
-                        return "Здравствуй небо в облаках, здравствуй юность в сапогах..."
-                    case 1 :
-                        game.think(player_actor, "Я выбираю решку.")
-                        game.talk(author_actor, "Преподаватель подбрасывает монетку и ловким движением рук ловит монетку.")
-                        game.talk(author_actor, "Монетка предательски была повернута противоположной стороной то есть орлом.")
-                        game.talk(ss_teacher_actor, "Какая досада молодой человек, повезёт в следующий раз.")
-                        return "Здравствуй небо в облаках, здравствуй юность в сапогах..."
+                eagle = game.select("Ваши действия:", variants) == 0
+                game.talk(player_actor, "Я выбираю орёл." if eagle else "Я выбираю решку.")
+                game.talk(author_actor, "Преподаватель подбрасывает монетку и ловким движением рук ловит монетку.")
+
+                from random import getrandbits
+                if bool(getrandbits(1)):
+                    game.talk(author_actor, "Монетка предательски была повернута противоположной стороной.")
+                    game.talk(ss_teacher_actor, "Какая досада молодой человек, повезёт в следующий раз.")
+                    return "Здравствуй небо в облаках, здравствуй юность в сапогах..."
+                else:
+                    game.talk(ss_teacher_actor, "Давай зачётку, везунчик.")
+                    game.talk(author_actor, "Вы протягиваете зачётку")
+                    game.talk(author_actor, "Преподаватель ставит в зачётку пять.")
+                    return
             case 1 :
                 game.talk(player_actor, "Простите, но я не азартный игрок, поэтому откажусь.")
                 game.talk(ss_teacher_actor, "Желание студента для меня закон.")
