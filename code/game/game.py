@@ -153,7 +153,7 @@ def level_2(game: GameAPI) -> None | str:
             game.talk(author_actor, "+10 к репутации")
         case 1 :
             game.think(player_actor, "У меня развилась острая аллергия на гранит науки.")
-            game.think(player_actor, "При приближении к учебному заведению у меня начинается чихание, кашель и появляется сыпь в виде лекций.")
+            game.talk(player_actor, "При приближении к учебному заведению у меня начинается чихание, кашель и появляется сыпь в виде лекций.")
             game.talk(ss_teacher_actor, "Могли что то и пооригинальнее придумать.")
             game.talk(ss_teacher_actor, "Недолюбливаю хитропопых студентов.")
             player["reputation"] -= 10
