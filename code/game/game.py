@@ -92,8 +92,7 @@ def level_1(game: GameAPI) -> None | str:
     game.talk(author_actor, "Вы выходите на остановке и подходите к посту охраны.")
     if player["intelligence"] < 0:
         game.talk(author_actor, "Вы пытаетесь войти, но вас останавливает охранник.")
-        game.talk(security_actor, "Вы нарушаете форму одежды.")
-        game.talk(security_actor, "Это не офисный стиль, так ещё и в шортах!")
+        game.talk(security_actor, "Вы нарушает форму одежды. Это не офисный стиль, так ещё и в шортах!")
         game.talk(player_actor, "Но мне очень надо пройти. У меня сегодня зачёт!")
         game.talk(security_actor, "Н-Е-Т-!")
         return "Что-то явно пошло не так."
