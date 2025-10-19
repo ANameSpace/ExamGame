@@ -229,7 +229,7 @@ def level_2(game: GameAPI) -> None | str:
                 game.talk(author_actor, "Вы выходите из аудитории, довольный результатом.")
                 return
             case 1 :
-                game.think(player_actor, "Нет уж, я ответил на более высокую оценку.")
+                game.talk(player_actor, "Нет уж, я ответил на более высокую оценку.")
                 game.talk(author_actor, "Преподаватель хихикнул и сказал:")
                 game.talk(ss_teacher_actor, "Молодой человек, вы даже на три толком не ответили.")
                 game.think(player_actor, "Я ответил.")
