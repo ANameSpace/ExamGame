@@ -147,7 +147,7 @@ def level_2(game: GameAPI) -> None | str:
     )
     match game.select("Ваши действия:", variants):
         case 0 :
-            game.think(player_actor, "Не буду скрывать, я прогуливал.")
+            game.talk(player_actor, "Не буду скрывать, я прогуливал.")
             game.talk(ss_teacher_actor, "Достаточно опрометчиво с вашей стороны, но я ценю честность.")
             player["reputation"] += 10
             game.talk(author_actor, "+10 к репутации")
