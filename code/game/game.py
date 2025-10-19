@@ -137,7 +137,7 @@ def level_2(game: GameAPI) -> None | str:
         
     game.talk(author_actor, "Вы вошли, и уже хотели сесть за парту, но вас вопросительно окликнул преподаватель.")
     game.talk(ss_teacher_actor, "Молодой человек, а вы собственно говоря кто?")
-    game.think(player_actor, "Ваш студент, пришёл на зачёт")
+    game.talk(player_actor, "Ваш студент, пришёл на зачёт.")
     game.talk(ss_teacher_actor, "Любопытно, я вас впервые вижу за год.")
     game.talk(ss_teacher_actor, "А где пропадали если не секрет?")
     
