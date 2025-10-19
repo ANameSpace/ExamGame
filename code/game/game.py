@@ -194,7 +194,7 @@ def level_2(game: GameAPI) -> None | str:
                         game.talk(ss_teacher_actor, "Какая досада молодой человек, повезёт в следующий раз.")
                         return "Здравствуй небо в облаках, здравствуй юность в сапогах..."
             case 1 :
-                game.think(player_actor, "Простите, но я не азартный игрок, поэтому откажусь.")
+                game.talk(player_actor, "Простите, но я не азартный игрок, поэтому откажусь.")
                 game.talk(ss_teacher_actor, "Желание студента для меня закон.")
                 return
     if player["intelligence"] > 0:
