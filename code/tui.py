@@ -4,7 +4,7 @@ from enum import Enum
 from time import sleep
 from typing import Any
 
-debug = True
+debug = False
 
 class TextColor(Enum):
     DEFAULT = 0
