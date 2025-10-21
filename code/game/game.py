@@ -160,7 +160,6 @@ def level_2(game: GameAPI) -> None | str:
             game.talk(ss_teacher_actor, "Недолюбливаю хитропопых студентов.")
             player["reputation"] -= 10
             game.talk(author_actor, "-10 к репутации")
-            return
  
     if player["reputation"] < 0:
         game.talk(ss_teacher_actor, "Могу облегчить вам задачу в какой то степени.")

@@ -4,6 +4,7 @@ from enum import Enum
 from time import sleep
 from typing import Any
 
+debug = True
 
 class TextColor(Enum):
     DEFAULT = 0
@@ -199,6 +200,11 @@ class TextField(TUIObject):
         lines: list[str] = self._format_text()
         if len(lines) > self.y_size:
             lines = lines[:self.y_size]
+
+        if debug:
+            self.pre_render(window)
+            window.refresh()
+            return
 
         match animation_id:
             case self.TextAnimation.BASE.value:
